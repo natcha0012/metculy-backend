@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres:
-    container_name: dou-db
+    container_name: metculy_db
     image: postgres:latest
     restart: always
     ports:
