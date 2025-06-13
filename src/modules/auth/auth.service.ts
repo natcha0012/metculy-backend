@@ -27,10 +27,16 @@ export class AuthService {
         HttpStatus.UNAUTHORIZED,
       );
     }
-    const payload = { id: user.id, username: user.username };
+    const payload = {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+      phoneNumber: user.phoneNumber,
+    };
     const token = await this.jwtService.signAsync(payload);
     return {
       token,
+      id: user.id,
       username: user.username,
       role: user.role as UserRole,
       phoneNumber: user.phoneNumber,
