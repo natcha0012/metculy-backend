@@ -26,11 +26,11 @@ model User {
 }
 
 model Patient {
-  id          BigInt        @id @default(autoincrement())
-  name        String
-  surname     String
+  id          Int           @id @default(autoincrement())
+  firstName   String        @map("first_name")
+  lastName    String        @map("last_name")
   nationalId  String        @unique() @map("national_id")
-  phoneNumber String
+  phoneNumber String        @map("phone_number")
   detail      String?
   Appointment Appointment[]
 
@@ -38,12 +38,12 @@ model Patient {
 }
 
 model Appointment {
-  id          BigInt  @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
   description String
   date        String
-  doctorId    Int
-  patientId   BigInt
+  doctorId    Int     @map("doctor_id")
+  patientId   Int     @map("patient_id")
   Doctor      User    @relation(fields: [doctorId], references: [id])
   Patient     Patient @relation(fields: [patientId], references: [id])
 

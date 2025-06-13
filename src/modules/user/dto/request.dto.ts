@@ -13,22 +13,21 @@ export class CreateUserReq {
   role: string;
 
   @IsString()
-  @IsOptional()
   @Matches(phoneNumberRegex, { message: 'phonenumber is in wrong format' })
   phoneNumber: string;
 }
 
 export class UpdateUsersReq {
-  @IsEnum(UserRole)
   @IsOptional()
+  @IsEnum(UserRole)
   role: UserRole;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   username: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   @Matches(phoneNumberRegex, { message: 'phonenumber is in wrong format' })
   phoneNumber: string;
 }
