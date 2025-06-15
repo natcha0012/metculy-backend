@@ -13,6 +13,18 @@ export class PatientService {
     return patient;
   }
 
+  async getPatientFilterOptions() {
+    const optionList = await this.prisma.patient.findMany({
+      select: { id: true, firstName: true, lastName: true },
+    });
+    return optionList.map((option) => {
+      return {
+        id: option.id,
+        name: `${option.firstName} ${option.lastName}`,
+      };
+    });
+  }
+
   findAll() {
     return this.prisma.patient.findMany();
   }

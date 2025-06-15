@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { PatientService } from './patient.service';
 import { CreatePatientRequest, UpdatePatientRequest } from './dto/request.dto';
 import { UserRole } from 'src/enums/user.enum';
 import { Auth } from 'src/decorator/auth.decorator';
+import { AuthGuard } from 'src/guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('patient')
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
@@ -25,6 +28,11 @@ export class PatientController {
   @Get()
   findAll() {
     return this.patientService.findAll();
+  }
+
+  @Get('/filter-options')
+  getPatientFilterOptions() {
+    return this.patientService.getPatientFilterOptions();
   }
 
   @Get(':id')

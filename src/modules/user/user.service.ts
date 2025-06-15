@@ -19,6 +19,20 @@ export class UserService {
       phoneNumber: user.phoneNumber,
     };
   }
+
+  async getDoctorFilterOptions() {
+    const optionList = await this.prisma.user.findMany({
+      where: { role: UserRole.DOCTOR },
+      select: { id: true, username: true },
+    });
+    return optionList.map((option) => {
+      return {
+        id: option.id,
+        name: option.username,
+      };
+    });
+  }
+
   async createUser(
     input: CreateUserReq,
     user: UserTokenPayload,

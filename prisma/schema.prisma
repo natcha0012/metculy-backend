@@ -47,5 +47,8 @@ model Appointment {
   Doctor      User    @relation(fields: [doctorId], references: [id])
   Patient     Patient @relation(fields: [patientId], references: [id])
 
+  @@index([doctorId])
+  @@index([patientId])
+  @@index([date])
   @@map("appointment")
 }

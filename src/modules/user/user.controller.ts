@@ -30,6 +30,11 @@ export class UserController {
     return this.userService.createUser(input, user);
   }
 
+  @Get('/filter-options')
+  getDoctorFilterOptions() {
+    return this.userService.getDoctorFilterOptions();
+  }
+
   @Get()
   findAll() {
     return this.userService.findAll();
