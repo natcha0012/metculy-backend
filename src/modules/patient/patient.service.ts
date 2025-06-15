@@ -51,6 +51,15 @@ export class PatientService {
   }
 
   async remove(id: number) {
+    const appointment = await this.prisma.appointment.findFirst({
+      where: { patientId: id },
+    });
+    if (appointment) {
+      throw new HttpException(
+        "Please Patient's Appointment",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     await this.prisma.patient.delete({ where: { id } });
     return { message: `This action deletes a #${id} patient` };
   }

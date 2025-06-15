@@ -90,6 +90,15 @@ export class UserService {
   }
 
   async remove(id: number) {
+    const appointment = await this.prisma.appointment.findFirst({
+      where: { doctorId: id },
+    });
+    if (appointment) {
+      throw new HttpException(
+        "Please Doctor's Appointment",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     await this.prisma.user.delete({ where: { id } });
     return { message: `This action removes a #${id} user` };
   }
